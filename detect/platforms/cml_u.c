@@ -1,20 +1,19 @@
 // SPDX-License-Identifier: GPL-2.0-only
+//
+// Comet Lake U (CML-U) -- 10th gen mobile (400-series PCH)
+// GPP_B13 (COMM_0, local idx 13) port=0x6e PAD_CFG_BASE=0x600
+// PADCFGLOCK at offset 0x88 (Intel doc 834810)
+// Device IDs: 0x0660, 0x0661
+// Supports both LPC and eSPI.
+// PCR_BASE=0xFD000000
 #include "defs.h"
 
-struct platform platform_cfl_s_h = {
-	.name = "CoffeeLake S/H",
+struct platform platform_cml_u = {
+	.name = "CometLake U",
 	.pchs = (struct pch[]) {
-		// Intel 300 Series and Intel C240 Series
-		{"Q370", 0xa306},
-		{"H370", 0xa304},
-		{"Z390", 0xa305},
-		{"B360", 0xa308},
-		{"H310", 0xa303},
-		{"C242", 0xa30a},
-		{"C246", 0xa309},
-		{"HM370", 0xa30d},
-		{"QM370", 0xa30c},
-		{"CM246", 0xa30e},
+		{"CML-U PCH", 0x0660},
+		{"CML-U PCH", 0x0661},
+		{0}
 	},
 	.global_pins = (struct pin[]) {
 		{ "GPP_B13", "PLTRST#",    0x6e, 0x88, 1<<13 },
@@ -45,5 +44,3 @@ struct platform platform_cfl_s_h = {
 		{0}
 	}
 };
-
-// FIXME: add Coffee Lake (and Amber Lake) LP

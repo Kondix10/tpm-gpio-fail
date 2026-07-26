@@ -15,11 +15,33 @@
 extern struct platform platform_skl_kbl_s_h;
 extern struct platform platform_skl_kbl_lp;
 extern struct platform platform_cfl_s_h;
+extern struct platform platform_adl_p;
+extern struct platform platform_adl_s;
+extern struct platform platform_rpl_s;
+extern struct platform platform_rpl_p;
+extern struct platform platform_cnp_lp;
+extern struct platform platform_cml_u;
+extern struct platform platform_cml_dt;
+extern struct platform platform_tgl;
+extern struct platform platform_arl_s;
+extern struct platform platform_mtl;
+extern struct platform platform_pre_skl;
 
 static struct platform *platforms[] = {
 	&platform_skl_kbl_s_h,
 	&platform_skl_kbl_lp,
 	&platform_cfl_s_h,
+	&platform_adl_p,
+	&platform_adl_s,
+	&platform_rpl_s,
+	&platform_rpl_p,
+	&platform_cnp_lp,
+	&platform_cml_u,
+	&platform_cml_dt,
+	&platform_tgl,
+	&platform_arl_s,
+	&platform_mtl,
+	&platform_pre_skl,
 	NULL
 };
 
@@ -99,18 +121,27 @@ static int scan_platform(struct platform *platform)
 	printf("Hiding P2SB bridge...\n");
 	pci_write32(P2SB, P2SBC, P2SBC_HIDE);
 
-	int status = detect_pinset(platform->global_pins);
+	int status = 0;
+	if (platform->global_pins) {
+		status = detect_pinset(platform->global_pins);
+	} else {
+		printf("No PLTRST# pad definition for this platform (not affected)\n");
+	}
 
 	int is_espi = 1;
 	if (platform->lpc_pins)
 		is_espi = !!(pcr_read32(platform->espi_check_port, platform->espi_check_offset) & platform->espi_check_bit);
 
-	if (is_espi) {
-		printf("Platform in eSPI mode!\n");
-		status |= detect_pinset(platform->espi_pins);
+	if (platform->espi_pins || platform->lpc_pins) {
+		if (is_espi) {
+			printf("Platform in eSPI mode!\n");
+			status |= detect_pinset(platform->espi_pins);
+		} else {
+			printf("Platform in LPC mode!\n");
+			status |= detect_pinset(platform->lpc_pins);
+		}
 	} else {
-		printf("Platform in LPC mode!\n");
-		status |= detect_pinset(platform->lpc_pins);
+		printf("No bus pins defined for this platform\n");
 	}
 
 	return status;
