@@ -31,6 +31,7 @@ struct platform platform_cnp_lp = {
 		{ "GPP_B13", "PLTRST#",    0x6e, 0x80, 1<<13 },
 		{0}
 	},
+	.pad_cfg_base = 0x600,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,
@@ -54,5 +55,8 @@ struct platform platform_cnp_lp = {
 		{"GPP_A9",  "ESPI_CLK",    0x6e, 0x80, 1<<9  },
 		{"GPP_A14", "ESPI_RESET#", 0x6e, 0x80, 1<<14 },
 		{0}
-	}
+	},
+	.tier = 2,
+	.summary = "VULNERABLE (unconfirmed) -- CNP-LP (T480s) -- pad unlocked, mechanism untested, no PADCFGLOCK register",
+	.action = "Community testing needed -- kukri PoC does not support this PCH family"
 };

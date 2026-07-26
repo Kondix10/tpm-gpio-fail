@@ -27,6 +27,7 @@ struct platform platform_adl_p = {
 		{ "GPP_B13", "PLTRST#",    0x6e, 0x80, 1<<13 },
 		{0}
 	},
+	.pad_cfg_base = 0x600,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,
@@ -40,5 +41,8 @@ struct platform platform_adl_p = {
 		{"GPP_A9",  "ESPI_CLK",    0x6e, 0x80, 1<<9  },
 		{"GPP_A14", "ESPI_RESET#", 0x6e, 0x80, 1<<14 },
 		{0}
-	}
+	},
+	.tier = 3,
+	.summary = "VULNERABILITY UNCERTAIN -- ADL-P (NV4x, NS50) -- GPIO lock absent, writes verified, PLTRST# assertion NOT confirmed on this PCH die",
+	.action = "Physical scope verification needed -- may not be electrically connected"
 };

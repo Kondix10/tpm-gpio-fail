@@ -29,6 +29,7 @@ struct platform platform_rpl_s = {
 		{ "GPP_B13", "PLTRST#",    0x6d, 0x110, 1<<13 },
 		{0}
 	},
+	.pad_cfg_base = 0x700,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,
@@ -42,5 +43,8 @@ struct platform platform_rpl_s = {
 		{"GPP_A9",  "ESPI_CLK",    0x6d, 0x110, 1<<9  },
 		{"GPP_A14", "ESPI_RESET#", 0x6d, 0x110, 1<<14 },
 		{0}
-	}
+	},
+	.tier = 3,
+	.summary = "VULNERABILITY UNCERTAIN -- RPL-S desktop -- GPIO lock absent, PLTRST# assertion NOT confirmed on this PCH die",
+	.action = "Community testing needed -- physical scope verification"
 };

@@ -33,6 +33,7 @@ struct platform platform_arl_s = {
 		{ "GPP_B13", "PLTRST#",    0x6d, 0x120, 1<<13 },
 		{0}
 	},
+	.pad_cfg_base = 0x700,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,
@@ -46,5 +47,8 @@ struct platform platform_arl_s = {
 		{"GPP_A9",  "ESPI_CLK",    0x6d, 0x120, 1<<9  },
 		{"GPP_A14", "ESPI_RESET#", 0x6d, 0x120, 1<<14 },
 		{0}
-	}
+	},
+	.tier = 3,
+	.summary = "VULNERABILITY UNCERTAIN -- ARL-S (Arrow Lake S 15th gen) -- GPIO lock absent, PLTRST# assertion NOT confirmed",
+	.action = "Community testing needed -- Intel doc 834810 lists PADCFGLOCK at 0x120"
 };

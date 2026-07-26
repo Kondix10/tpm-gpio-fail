@@ -30,6 +30,7 @@ struct platform platform_cml_dt = {
 		{ "GPP_B13", "PLTRST#",    0xaf, 0xa8, 1<<13 },
 		{0}
 	},
+	.pad_cfg_base = 0x400,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,
@@ -53,5 +54,8 @@ struct platform platform_cml_dt = {
 		{"GPP_A9",  "ESPI_CLK",    0xaf, 0xa0, 1<<9  },
 		{"GPP_A14", "ESPI_RESET#", 0xaf, 0xa0, 1<<14 },
 		{0}
-	}
+	},
+	.tier = 1,
+	.summary = "VULNERABLE (confirmed) -- CML-DT (Comet Lake Desktop, B460/Z490) -- PADCFGLOCK at 0xA8",
+	.action = "Ensure coreboot locks this pad via gpio_lock_pad() or PAD_CFG_NF_LOCK()"
 };

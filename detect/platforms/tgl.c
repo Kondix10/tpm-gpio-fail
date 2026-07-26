@@ -39,6 +39,7 @@ struct platform platform_tgl = {
 		{ "GPP_B13", "PLTRST#",    0x6e, 0x80, 1<<13 },
 		{0}
 	},
+	.pad_cfg_base = 0x700,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,
@@ -62,5 +63,8 @@ struct platform platform_tgl = {
 		{"GPP_A9",  "ESPI_CLK",    0x6e, 0x80, 1<<9  },
 		{"GPP_A14", "ESPI_RESET#", 0x6e, 0x80, 1<<14 },
 		{0}
-	}
+	},
+	.tier = 2,
+	.summary = "VULNERABLE (unconfirmed) -- TGL (Tiger Lake 11th gen) -- PADCFGLOCK at 0x80 per Intel doc, no community test data",
+	.action = "Community testing needed"
 };

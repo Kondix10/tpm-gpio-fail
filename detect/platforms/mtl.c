@@ -27,5 +27,8 @@ struct platform platform_mtl = {
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,
 	.lpc_pins = NULL,
-	.espi_pins = NULL
+	.espi_pins = NULL,
+	.tier = -1,
+	.summary = "NOT VULNERABLE -- MTL (Core Ultra Series 1+) -- functional GPIO lock, eSPI-connected TPM",
+	.action = "GPIO PLTRST# manipulation does not apply to eSPI/LPC-connected TPMs"
 };

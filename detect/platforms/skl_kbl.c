@@ -35,6 +35,7 @@ struct platform platform_skl_kbl_s_h = {
 		{ "GPP_B13", "PLTRST#",    0xaf, 0xa8, 1<<13 },
 		{0}
 	},
+	.pad_cfg_base = 0x600,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,
@@ -58,7 +59,10 @@ struct platform platform_skl_kbl_s_h = {
 		{"GPP_A9",  "ESPI_CLK",    0xaf, 0xa0, 1<<9  },
 		{"GPP_A14", "ESPI_RESET#", 0xaf, 0xa0, 1<<14 },
 		{0}
-	}
+	},
+	.tier = 1,
+	.summary = "VULNERABLE (confirmed) -- SPT/KBP (T480, M900, B460, etc.) -- mechanism confirmed working by kukri",
+	.action = "Ensure coreboot locks this pad via gpio_lock_pad() or PAD_CFG_NF_LOCK()"
 };
 
 struct platform platform_skl_kbl_lp = {
@@ -79,6 +83,7 @@ struct platform platform_skl_kbl_lp = {
 		{ "GPP_B13", "PLTRST#",    0xaf, 0xa8, 1<<13 },
 		{0}
 	},
+	.pad_cfg_base = 0x600,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,
@@ -102,5 +107,8 @@ struct platform platform_skl_kbl_lp = {
 		{"GPP_A9",  "ESPI_CLK",    0xaf, 0xa0, 1<<9  },
 		{"GPP_A14", "ESPI_RESET#", 0xaf, 0xa0, 1<<14 },
 		{0}
-	}
+	},
+	.tier = 1,
+	.summary = "VULNERABLE (confirmed) -- SPT/KBP LP -- mechanism confirmed working by kukri",
+	.action = "Ensure coreboot locks this pad via gpio_lock_pad() or PAD_CFG_NF_LOCK()"
 };
