@@ -21,6 +21,7 @@ struct platform {
 	struct pch *pchs;
 	struct pin *global_pins;
 	uint32_t pad_cfg_base;          // PAD_CFG_BASE within the PCR port
+	int pad_stride;                 // Bytes per pad in DW0 address calc (8 for SPT/KBP/CML-DT, 16 for others)
 	uint8_t espi_check_port;
 	uint32_t espi_check_offset;
 	uint32_t espi_check_bit;

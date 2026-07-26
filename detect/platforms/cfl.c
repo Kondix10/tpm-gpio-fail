@@ -21,6 +21,7 @@ struct platform platform_cfl_s_h = {
 		{0}
 	},
 	.pad_cfg_base = 0x600,
+	.pad_stride = 16,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,

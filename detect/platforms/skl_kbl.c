@@ -35,7 +35,8 @@ struct platform platform_skl_kbl_s_h = {
 		{ "GPP_B13", "PLTRST#",    0xaf, 0xa8, 1<<13 },
 		{0}
 	},
-	.pad_cfg_base = 0x600,
+	.pad_cfg_base = 0x400,
+	.pad_stride = 8,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,
@@ -83,7 +84,8 @@ struct platform platform_skl_kbl_lp = {
 		{ "GPP_B13", "PLTRST#",    0xaf, 0xa8, 1<<13 },
 		{0}
 	},
-	.pad_cfg_base = 0x600,
+	.pad_cfg_base = 0x400,
+	.pad_stride = 8,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,

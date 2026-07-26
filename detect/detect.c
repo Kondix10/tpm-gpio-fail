@@ -151,7 +151,7 @@ static void print_summary(struct platform *platform, int detection_result, int a
 
 	if (platform->global_pins) {
 		int pad_index = bitpos(platform->global_pins->lock_bit);
-		uint32_t dw0_offs = platform->pad_cfg_base + (pad_index * 16);
+		uint32_t dw0_offs = platform->pad_cfg_base + (pad_index * platform->pad_stride);
 		printf("PLTRST# pad: %s/%s at port 0x%x, offset 0x%x\n",
 		       platform->global_pins->gpio, platform->global_pins->nf,
 		       platform->global_pins->port, dw0_offs);
@@ -171,12 +171,12 @@ static void print_summary(struct platform *platform, int detection_result, int a
 static void print_register_layout(struct platform *platform, struct pin *pin)
 {
 	int pad_index = bitpos(pin->lock_bit);
-	uint32_t dw0_offs = platform->pad_cfg_base + (pad_index * 16);
+	uint32_t dw0_offs = platform->pad_cfg_base + (pad_index * platform->pad_stride);
 	uint32_t lock_base = pin->lock_offset;
 
 	printf("\n  Register layout for pad %s (pad index %d):\n", pin->gpio, pad_index);
 	printf("    PAD_CFG_BASE:           0x%x\n", platform->pad_cfg_base);
-	printf("    DW0 (PAD_CFG0):         0x%x  (base + pad_idx * 16)\n", dw0_offs);
+	printf("    DW0 (PAD_CFG0):         0x%x  (base + pad_idx * %d)\n", dw0_offs, platform->pad_stride);
 	printf("    DW1 (PAD_CFG1):         0x%x  (DW0 + 4)\n", dw0_offs + 4);
 	printf("    DW2 (PAD_CFG2):         0x%x  (DW0 + 8)\n", dw0_offs + 8);
 	printf("    DW3 (PAD_CFG3):         0x%x  (DW0 + 12)\n", dw0_offs + 12);
@@ -194,7 +194,7 @@ static void print_register_layout(struct platform *platform, struct pin *pin)
 static int perform_assertion(struct platform *platform, struct pin *pin)
 {
 	int pad_index = bitpos(pin->lock_bit);
-	uint32_t dw0_offs = platform->pad_cfg_base + (pad_index * 16);
+	uint32_t dw0_offs = platform->pad_cfg_base + (pad_index * platform->pad_stride);
 	uint32_t dw1_offs = dw0_offs + 4;
 
 	print_register_layout(platform, pin);

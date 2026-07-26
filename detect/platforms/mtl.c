@@ -23,6 +23,7 @@ struct platform platform_mtl = {
 		{0}
 	},
 	.global_pins = NULL,
+	.pad_stride = 16,
 	.espi_check_port = 0xc7,
 	.espi_check_offset = 0x3418,
 	.espi_check_bit = 1<<1,
